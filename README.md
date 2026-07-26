@@ -1,131 +1,178 @@
+# KSP Crime Intelligence Platform (PoC)
 
+> **AI-Powered Crime Intelligence, Investigation Analytics, and Decision Support System**
 
-# KSP Conversational AI & Crime Analytics Platform (PoC)
+The **KSP Crime Intelligence Platform** is a modern Proof of Concept (PoC) developed for the **Karnataka State Police (KSP)** to demonstrate how Artificial Intelligence, Data Analytics, and Interactive Visualization can assist investigators in solving cases more efficiently.
 
-A premium, state-of-the-art **Proof of Concept (PoC)** platform for **Crime Intelligence Analysis**, built specifically for the **Karnataka State Police (KSP)**. The platform combines conversational AI, relational and graph databases, and interactive analytics to enable investigators to explore crime data using natural language while maintaining strict evidence grounding.
+The platform combines **Conversational AI**, **Crime Analytics**, **Case Investigation**, **Relationship Graphs**, **Hotspot Mapping**, **Risk Prediction**, and **Supervisor Audit Monitoring** into a single integrated application.
 
-> **⚠ Warning**
+> **⚠ Disclaimer**
 >
-> This platform uses **entirely synthetic (fake) data**. All FIRs, accused profiles, victim details, locations, and relationships are artificially generated for demonstration purposes. No real names, incidents, or police records are included.
+> This application uses **100% synthetic (fake) data**. All FIRs, accused profiles, victims, locations, financial records, and relationships are artificially generated for demonstration and educational purposes only. No real police records or personal information are included.
 
 ---
 
 # Features
 
-## Conversational Crime Intelligence
+## 🔐 Role-Based Authentication
 
-* Ask natural language questions about crime data.
-* Example queries:
-
-  * *Show all theft cases in Indiranagar in the last 6 months.*
-  * *Who are the known associates of accused Amit Sharma?*
-* AI converts questions into database queries and returns grounded answers.
+* JWT-based authentication
+* Investigator and Supervisor roles
+* Role-specific module access
+* Secure API authorization
 
 ---
 
-## Strict Evidence Grounding (Anti-Hallucination)
+## 📊 Crime Analytics Dashboard
 
-The platform prevents fabricated responses by following a retrieval pipeline:
+Provides a complete overview of crime statistics including:
 
-1. Convert the user's natural language query into **read-only SQL/Cypher**.
-2. Execute the generated query on the database.
-3. Retrieve only matching records.
-4. Send retrieved facts to the LLM.
-5. Generate a response strictly based on retrieved evidence.
-
-No imaginary cases or unsupported facts are generated.
+* Crime distribution
+* Area-wise analysis
+* Monthly crime trends
+* Crime category breakdown
+* Interactive visualizations
 
 ---
 
-## Evidence Panel
+## 🤖 Conversational AI Assistant
 
-Each AI response includes an expandable evidence section displaying:
+Investigators can ask questions in natural language, such as:
 
-* Executed SQL query
-* Executed Cypher query
-* Retrieved database rows
-* Graph nodes and relationships used
+* Show all theft cases in Indiranagar.
+* Who are the known associates of accused Amit Sharma?
+* Display burglary cases from Whitefield.
 
-This provides complete transparency for every answer.
+The AI assistant:
+
+* Understands natural language
+* Retrieves relevant crime records
+* Generates evidence-grounded responses
+* Displays supporting data and relationship graphs
 
 ---
 
-## Interactive Crime Network Graph
+## 🕵️ Case360 Investigation
 
-Built using **Cytoscape.js**.
+Provides a complete investigation view for every FIR.
+
+Includes:
+
+* FIR information
+* Accused profiles
+* Victim details
+* Investigation timeline
+* Evidence records
+* Financial links
+* Relationship graph
+* Audit history
+
+---
+
+## 🌐 Criminal Relationship Graph
+
+Interactive network visualization using Cytoscape.js.
 
 Visualizes relationships between:
 
-* 🔴 Accused
-* 🔵 Victims
-* 🟡 FIRs
-* 🟢 Locations
+* FIRs
+* Accused
+* Victims
+* Locations
+* Financial transactions
 
-Clicking any node displays its associated metadata.
-
----
-
-## Analytics Dashboard
-
-Interactive crime analytics including:
-
-* Crime distribution
-* FIR trends
-* Location-wise statistics
-* Category breakdowns
-* Additional visualizations using Recharts
+Users can explore connected entities by selecting graph nodes.
 
 ---
 
-## PDF Audit Report
+## 🗺 Crime Hotspot Mapping
 
-Generate a structured PDF containing:
+Displays crime locations on an interactive map.
 
-* User conversation
-* AI responses
+Supports filtering by:
+
+* Crime type
+* Date range
+* Geographic region
+
+Helps identify crime-prone areas for strategic policing.
+
+---
+
+## 👤 Accused Risk Profiling
+
+Maintains offender profiles with:
+
+* Risk score
+* Risk level
+* Previous criminal history
+* Explainable risk factors
+
+Supports quick search and filtering.
+
+---
+
+## 📈 Bottleneck Analytics
+
+Predictive analytics module for investigation management.
+
+Provides:
+
+* Case pendency prediction
+* Investigator workload analysis
+* Risk-ranked investigations
+* Resource allocation insights
+
+---
+
+## 📋 Audit Trail
+
+Supervisor-exclusive module.
+
+Tracks:
+
+* User activity
+* AI conversations
 * Executed queries
-* Grounding evidence
+* Investigation history
+* System interactions
 
-Useful for documentation and audit purposes.
+Ensures transparency and accountability.
 
 ---
 
-## Supervisor Surveillance
+# System Architecture
 
-Supervisors can monitor:
+```text
+                    KSP Crime Intelligence Platform
 
-* User natural language queries
-* Generated SQL statements
-* Generated Cypher statements
-* System activity logs
-
-This feature is available only to supervisor accounts.
+                    ┌────────────────────────────┐
+                    │     React Frontend         │
+                    │ TypeScript • Tailwind CSS  │
+                    └──────────────┬─────────────┘
+                                   │
+                             REST API Calls
+                                   │
+                    ┌──────────────▼─────────────┐
+                    │      Express Backend       │
+                    │ Authentication • APIs      │
+                    └──────────────┬─────────────┘
+                                   │
+              ┌────────────────────┼────────────────────┐
+              │                    │                    │
+       kspData.ts           Gemini Service        Audit Logs
+   Synthetic Dataset        AI Processing      Activity Tracking
+              │                    │
+              └──────────────┬─────┘
+                             │
+                      JSON Responses
+                             │
+                     React UI Components
+```
 
 ---
 
 # Technology Stack
-
-## Backend
-
-* Python
-* FastAPI
-* SQLAlchemy
-
----
-
-## Databases
-
-### Relational Database
-
-* PostgreSQL
-* SQLAlchemy ORM
-
-### Graph Database
-
-* Neo4j
-* Neo4j Python Driver
-
----
 
 ## Frontend
 
@@ -134,236 +181,355 @@ This feature is available only to supervisor accounts.
 * Vite
 * Tailwind CSS
 * Cytoscape.js
+* Leaflet
 * Recharts
 
 ---
 
-## AI Layer
+## Backend
 
-* Anthropic Claude 3.5 Sonnet (`claude-3-5-sonnet-20241022`)
-
----
-
-# Running the Platform
-
-The application supports two deployment modes:
-
-1. Docker Compose (Recommended)
-2. Local Hybrid Mode (SQLite + JSON Graph)
+* Node.js
+* Express.js
+* JWT Authentication
+* REST APIs
 
 ---
 
-# Option A: Docker Compose
+## Artificial Intelligence
+
+* Google Gemini API
+* Rule-based fallback engine
+* Grounded AI responses
+
+---
+
+## Data Layer
+
+* Synthetic in-memory dataset
+* JSON-based crime records
+* Dynamic analytics generation
+
+---
+
+# Project Structure
+
+```text
+ksp-crime-intelligence-platform/
+│
+├── src/
+│   ├── components/
+│   │   ├── Login.tsx
+│   │   ├── Dashboard.tsx
+│   │   ├── Chat.tsx
+│   │   ├── Case360.tsx
+│   │   ├── GraphView.tsx
+│   │   ├── MapHotspots.tsx
+│   │   ├── AccusedList.tsx
+│   │   ├── BottleneckAnalytics.tsx
+│   │   ├── AuditLog.tsx
+│   │   ├── TrendForecast.tsx
+│   │   └── DemographicCorrelation.tsx
+│   │
+│   ├── server/
+│   │   ├── kspData.ts
+│   │   └── geminiService.ts
+│   │
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── types.ts
+│
+├── server.ts
+├── package.json
+└── README.md
+```
+
+---
+
+# Frontend Modules
+
+| Module                 | Description                         |
+| ---------------------- | ----------------------------------- |
+| Login                  | JWT-based authentication            |
+| Dashboard              | Crime analytics and KPIs            |
+| Chat                   | AI-powered investigation assistant  |
+| Case360                | Complete investigation dashboard    |
+| GraphView              | Criminal relationship visualization |
+| MapHotspots            | Geographic crime analysis           |
+| AccusedList            | Criminal profiles and risk scoring  |
+| BottleneckAnalytics    | Investigation workload prediction   |
+| TrendForecast          | Future crime forecasting            |
+| DemographicCorrelation | Crime vs demographic analysis       |
+| AuditLog               | Supervisor activity monitoring      |
+
+---
+
+# Backend Services
+
+The Express server exposes REST APIs for:
+
+* Authentication
+* Dashboard Analytics
+* Conversational AI
+* Case Investigation
+* Crime Hotspots
+* Risk Profiling
+* Evidence Management
+* Crime Forecasting
+* Audit Logging
+
+---
+
+# Request Flow
+
+```text
+User
+   │
+   ▼
+React Frontend
+   │
+REST API
+   │
+Express Server
+   │
+Business Logic
+   │
+Synthetic Dataset
+   │
+Gemini AI
+   │
+Grounded Response
+   │
+JSON
+   │
+Dashboard / Graph / Chat / Tables
+```
+
+---
+
+# AI Processing Flow
+
+```text
+User Question
+      │
+      ▼
+Chat Module
+      │
+      ▼
+Gemini Service
+      │
+      ▼
+Ground Query
+      │
+      ▼
+Synthetic Dataset
+      │
+      ▼
+Retrieve Relevant Facts
+      │
+      ▼
+Generate Response
+      │
+      ▼
+Answer + Sources + Graph
+```
+
+---
+
+# Security
+
+* JWT Authentication
+* Role-Based Access Control (RBAC)
+* Investigator and Supervisor roles
+* Protected REST APIs
+* Secure request authorization
+
+---
+
+# Key Highlights
+
+* 🤖 AI-Powered Conversational Investigation
+* 📊 Interactive Crime Analytics Dashboard
+* 🕵️ 360° Case Investigation View
+* 🌐 Criminal Relationship Network Graph
+* 🗺 Geographic Crime Hotspot Mapping
+* 👤 Explainable Accused Risk Profiling
+* 📈 Predictive Investigation Analytics
+* 📋 Supervisor Audit Trail
+* 🔐 JWT-Based Authentication
+* ⚡ Modular Full-Stack Architecture
+* 🧪 Synthetic Dataset for Safe Demonstration
+
+---
+
+# Future Enhancements
+
+* PostgreSQL integration for persistent storage
+* Neo4j graph database for advanced relationship analysis
+* Real-time crime data ingestion
+* Speech-to-text and multilingual support
+* Mobile application for field investigators
+* AI-powered FIR summarization
+* Predictive policing models
+* Secure cloud deployment
+* GIS-based advanced crime heatmaps
+
+---
+Add the following **"Getting Started"** section to your README.
+
+---
+
+# 🚀 Getting Started
 
 ## Prerequisites
 
-* Docker
-* Docker Compose
+Make sure you have the following installed:
 
----
+* **Node.js** (v18 or later)
+* **npm** (comes with Node.js)
 
-## Configure Environment Variables
-
-Create a `.env` file in the project root:
-
-```env
-ANTHROPIC_API_KEY=your_actual_anthropic_api_key
-```
-
-> If no API key is provided, the application automatically switches to a rule-based mock query engine.
-
----
-
-## Launch Services
+Verify your installation:
 
 ```bash
-docker-compose up -d
-```
-
-This starts:
-
-* PostgreSQL
-* Neo4j
-* FastAPI Backend
-* React Frontend
-
----
-
-## Seed Databases
-
-```bash
-docker-compose exec backend python seed.py
-```
-
-Seeds approximately:
-
-* 200 FIRs
-* 150 Accused
-* 150 Victims
-* 50 Locations
-
----
-
-## Access
-
-Frontend
-
-```
-http://localhost:5173
-```
-
-Backend API
-
-```
-http://localhost:8000/docs
+node -v
+npm -v
 ```
 
 ---
 
-# Option B: Local Hybrid Mode
+# Installation
 
-No PostgreSQL or Neo4j installation required.
-
-The backend automatically uses:
-
-* SQLite
-* In-memory JSON Graph Database
-
----
-
-## Backend Setup
+Clone the repository:
 
 ```bash
-cd backend
+git clone <repository-url>
+cd ksp-crime-intelligence-platform
 ```
 
-Create virtual environment
+Install dependencies:
 
 ```bash
-python -m venv venv
-```
-
-Windows
-
-```powershell
-.\venv\Scripts\Activate.ps1
-```
-
-Linux/macOS
-
-```bash
-source venv/bin/activate
-```
-
-Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-Create `.env`
-
-```env
-DATABASE_URL=sqlite:///ksp_db.db
-ANTHROPIC_API_KEY=your_api_key
-```
-
-Seed database
-
-```bash
-python seed.py
-```
-
-Run server
-
-```bash
-uvicorn app.main:app --reload --port 8000
-```
-
----
-
-## Frontend Setup
-
-```bash
-cd frontend
 npm install
+```
+
+---
+
+# Run the Application
+
+Start the development server:
+
+```bash
 npm run dev
 ```
 
-Open:
-
-```
-http://localhost:5173
-```
-
----
-
-# Authentication & RBAC
-
-The platform uses **JWT Authentication** with Role-Based Access Control.
-
-| Role         | Username                                                  | Password    | Permissions                                       |
-| ------------ | --------------------------------------------------------- | ----------- | ------------------------------------------------- |
-| Investigator | [investigator@ksp.gov.in](mailto:investigator@ksp.gov.in) | password123 | Chat Terminal, Analytics Dashboard                |
-| Supervisor   | [supervisor@ksp.gov.in](mailto:supervisor@ksp.gov.in)     | password123 | Chat Terminal, Analytics, Surveillance Audit Logs |
-
-The login page includes autofill buttons for quick role switching.
-
----
-
-# Project Highlights
-
-* Conversational Crime Intelligence
-* Natural Language Query Interface
-* SQL & Neo4j Dual Database Architecture
-* Explainable AI Responses
-* Anti-Hallucination Grounding
-* Interactive Crime Relationship Graph
-* Analytics Dashboard
-* Evidence Inspection Panel
-* PDF Audit Report Generation
-* JWT Authentication & RBAC
-* Supervisor Surveillance Dashboard
-* Docker-Based Deployment
-* SQLite & JSON Graph Fallback Mode
-* Synthetic Dataset for Safe Demonstration
-
----
-
-# Sample Questions
-
-* Show theft cases in Indiranagar from the last six months.
-* List all burglary FIRs linked to Whitefield.
-* Who are the known associates of accused Amit Sharma?
-* Show all FIRs connected to a specific victim.
-* Which locations have the highest number of theft cases?
-* Display the relationship network for FIR-1025.
-* Summarize crime trends over the last year.
-* Find repeat offenders involved in multiple FIRs.
-
----
-
-# Platform Workflow
+The application will be available at:
 
 ```text
-User Query
-      │
-      ▼
-Natural Language Processing
-      │
-      ▼
-SQL / Cypher Generation
-      │
-      ▼
-Database Retrieval
-(PostgreSQL + Neo4j)
-      │
-      ▼
-Evidence Collection
-      │
-      ▼
-LLM Response Synthesis
-      │
-      ▼
-Grounded Answer + Evidence Panel + Network Graph
+Frontend: http://localhost:5173
+Backend API: http://localhost:3000
 ```
+
+> **Note:** The project uses a single Express server with Vite integration, so both the frontend and backend run together during development.
+
+---
+
+# Build for Production
+
+Create an optimized production build:
+
+```bash
+npm run build
+```
+
+---
+
+# Preview Production Build
+
+```bash
+npm run preview
+```
+
+---
+
+# Default Login Credentials
+
+## Investigator
+
+```text
+Email: investigator@ksp.gov.in
+Password: password123
+```
+
+### Access
+
+* Dashboard
+* Chat Assistant
+* Case360
+* Hotspot Map
+* Accused List
+* Analytics
+
+---
+
+## Supervisor
+
+```text
+Email: supervisor@ksp.gov.in
+Password: password123
+```
+
+### Additional Access
+
+* Audit Logs
+* User Activity Monitoring
+* Investigation Query History
+
+---
+
+# Sample AI Queries
+
+Try these example questions in the AI Chat Assistant:
+
+* Show all theft cases in Indiranagar.
+* Display burglary cases from Whitefield.
+* Who are the known associates of accused Amit Sharma?
+* Show high-risk accused profiles.
+* Display crime hotspots for robbery.
+* List pending investigations.
+* Show financial links related to Case FIR-1025.
+
+---
+
+# Project Workflow
+
+```text
+Start Application
+        │
+        ▼
+Login (Investigator / Supervisor)
+        │
+        ▼
+Select a Module
+        │
+        ├── Dashboard
+        ├── Chat Assistant
+        ├── Case360
+        ├── Graph View
+        ├── Hotspot Map
+        ├── Analytics
+        └── Audit Logs (Supervisor)
+        │
+        ▼
+Backend APIs
+        │
+        ▼
+Synthetic Data + AI Processing
+        │
+        ▼
+Interactive Results
+```
+orm.
+
+
+# Conclusion
+
+The **KSP Crime Intelligence Platform** demonstrates how **Artificial Intelligence**, **interactive data visualization**, and **predictive analytics** can enhance crime investigation workflows. Its modular architecture, explainable AI approach, and role-based security make it a strong foundation for future integration with enterprise-scale law enforcement systems while using synthetic data for safe development and demonstration.
